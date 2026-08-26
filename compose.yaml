@@ -24,6 +24,7 @@ services:
       mlflow server --host 0.0.0.0 --port 5000
       --backend-store-uri sqlite:////mlflow/mlflow.db
       --artifacts-destination /mlflow/artifacts
+      --allowed-hosts mlflow:5000,localhost:5001,127.0.0.1:5001
     volumes:
       - mlflow-data:/mlflow
     ports: ["127.0.0.1:5001:5000"]
@@ -79,7 +80,7 @@ services:
     depends_on:
       api:
         condition: service_started
-    networks: [app-zone]
+    networks: [app-zone, presentation-zone]
     read_only: true
     tmpfs: ["/tmp"]
     cap_drop: ["ALL"]
@@ -91,6 +92,7 @@ networks:
   data-zone:
     internal: true
   ml-zone: {}
+  presentation-zone: {}
 
 volumes:
   postgres-data:

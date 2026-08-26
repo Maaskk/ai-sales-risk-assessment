@@ -1,0 +1,15 @@
+.git
+.github
+.next
+.venv
+.mentor-venv
+.agents
+.claude
+node_modules
+evidence
+public
+report
+work
+__pycache__
+*.pyc
+*.tsbuildinfo
