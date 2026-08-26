@@ -1,0 +1,7 @@
+Tool: NIST OSCAL CLI 1.0.3
+Tool source: Maven Central gov.nist.secauto.oscal.tools.oscal-cli:cli-core:1.0.3
+Downloaded archive SHA-1 verified against the checksum published alongside the archive: b42290e444f79fdcf5a055c6da058b135a8a7997
+Command: oscal-cli --no-color profile validate --as=json nist/oscal/ai-sales-selected-controls-profile.json
+Result: valid
+Validation date: 2026-08-25
+Scope note: CLI 1.0.3 bundles OSCAL 1.1.2 model code; the profile declares 1.1.3 and the official 1.1.3 JSON schema is vendored for later tool upgrades and review.

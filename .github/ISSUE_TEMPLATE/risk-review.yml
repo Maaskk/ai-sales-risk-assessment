@@ -1,0 +1,28 @@
+name: Risk review
+description: Propose or validate a risk, rating, control or residual-risk decision.
+title: "[RISK] "
+labels: [risk-review]
+body:
+  - type: input
+    id: risk_id
+    attributes:
+      label: Risk/scenario ID
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Confirmed evidence and source
+      description: Do not paste secrets, customer data or proprietary details into a public issue.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change and rationale
+    validations:
+      required: true
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decision owner and approval/expiry

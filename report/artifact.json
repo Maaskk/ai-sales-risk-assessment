@@ -1,0 +1,147 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "AI Sales Recommendation System — Cybersecurity & AI Risk Assessment",
+    "description": "Executive decision report for a synthetic, portfolio-grade EBIOS RM and NIST assessment.",
+    "generatedAt": "2026-08-26T07:12:37Z",
+    "sources": [
+      {"id": "risk-register", "label": "Provisional risk register", "path": "risk-register/risks.csv"},
+      {"id": "nist-controls", "label": "Selected NIST SP 800-53 controls", "path": "nist/controls.csv"},
+      {"id": "automated-evidence", "label": "Automated evidence summary", "path": "evidence/security-tests/summary.md"},
+      {"id": "risk-query", "label": "Risk report transformations", "path": "report/queries/risk_metrics.sql"},
+      {"id": "control-query", "label": "Control report transformation", "path": "report/queries/control_metrics.sql"},
+      {"id": "evidence-query", "label": "Evidence report transformation", "path": "report/queries/evidence_metrics.sql"},
+      {"id": "anssi-ebios", "label": "ANSSI EBIOS Risk Manager method", "href": "https://messervices.cyber.gouv.fr/guides/en-ebios-risk-manager-method"},
+      {"id": "nist-rmf", "label": "NIST Risk Management Framework", "href": "https://csrc.nist.gov/projects/risk-management/about-rmf"},
+      {"id": "nist-ai-rmf", "label": "NIST AI Risk Management Framework", "href": "https://www.nist.gov/itl/ai-risk-management-framework"}
+    ],
+    "cards": [
+      {
+        "id": "risk-card",
+        "description": "Provisional scenarios requiring stakeholder validation.",
+        "dataset": "risk_summary",
+        "sourceId": "risk-query",
+        "metrics": [
+          {"label": "Provisional risks", "field": "risk_count", "format": "number"},
+          {"label": "Critical inherent", "field": "critical_count", "format": "number"}
+        ]
+      },
+      {
+        "id": "control-card",
+        "description": "Tailored objectives, not a compliance baseline.",
+        "dataset": "control_summary",
+        "sourceId": "control-query",
+        "metrics": [
+          {"label": "Selected NIST controls", "field": "control_count", "format": "number"}
+        ]
+      },
+      {
+        "id": "test-card",
+        "description": "Local functional and security regression procedures.",
+        "dataset": "evidence_summary",
+        "sourceId": "evidence-query",
+        "metrics": [
+          {"label": "Passing tests", "field": "passing_tests", "format": "number"}
+        ]
+      },
+      {
+        "id": "image-card",
+        "description": "Unfixed critical Debian base-image advisories shared by all three lab images.",
+        "dataset": "evidence_summary",
+        "sourceId": "evidence-query",
+        "metrics": [
+          {"label": "Unfixed critical CVEs", "field": "unfixed_critical", "format": "number"},
+          {"label": "Unfixed high CVEs", "field": "unfixed_high", "format": "number"}
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "risk-distribution",
+        "title": "Provisional inherent-risk distribution",
+        "subtitle": "Ten synthetic reference scenarios; ratings require stakeholder validation.",
+        "question": "How are the current provisional scenarios distributed by inherent-risk rating?",
+        "rationale": "A compact bar chart makes the concentration in critical and high ratings visible without implying measured probability.",
+        "type": "bar",
+        "dataset": "risk_distribution",
+        "sourceId": "risk-query",
+        "encodings": {
+          "x": {"field": "rating", "type": "ordinal", "label": "Inherent rating"},
+          "y": {"field": "count", "type": "quantitative", "aggregate": "none", "format": "number", "label": "Risk scenarios"}
+        },
+        "valueFormat": "number",
+        "layout": "full",
+        "maxRows": 3,
+        "compatibleTypes": ["bar"]
+      }
+    ],
+    "tables": [
+      {
+        "id": "priority-risks",
+        "title": "Critical inherent-risk scenarios",
+        "subtitle": "Ordinal ratings are provisional until EBIOS workshops and production evidence are completed.",
+        "dataset": "priority_risks",
+        "sourceId": "risk-query",
+        "defaultSort": {"field": "score", "direction": "desc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "risk_id", "label": "Risk", "type": "text"},
+          {"field": "title", "label": "Scenario", "type": "text"},
+          {"field": "score", "label": "Score", "format": "number"},
+          {"field": "treatment", "label": "Treatment", "type": "text"},
+          {"field": "target_gate", "label": "Target gate", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "layout": "full", "body": "# AI Sales Recommendation System — Cybersecurity & AI Risk Assessment"},
+      {"id": "executive-summary", "type": "markdown", "layout": "full", "sourceId": "risk-register", "body": "## Executive Summary\n\n**The immediate decision is to complete discovery and governance before accepting production risk.** The synthetic reference assessment identifies credible customer-data disclosure, recommendation manipulation, ML supply-chain compromise, privileged misuse, availability, privacy, fairness and drift scenarios. Five of ten inherent risks are provisionally critical.\n\n**The repository is decision support—not an authorization to operate or a compliance certificate.** Company architecture, data, controls, legal duties, owners, appetite and residual-risk decisions remain unverified."},
+      {"id": "decision", "type": "markdown", "layout": "full", "body": "## Decision requested\n\nName the business, system, data, model, security, privacy/legal and residual-risk owners; approve the discovery and five EBIOS workshops; and authorize read-only collection of production evidence. Keep any deployment advisory-only, with human review and override, until the decision boundary and measurable acceptance criteria are approved."},
+      {"id": "headline-metrics", "type": "metric-strip", "layout": "full", "cardIds": ["risk-card", "control-card", "test-card", "image-card"]},
+      {"id": "risk-picture", "type": "markdown", "layout": "full", "sourceId": "risk-register", "body": "## Risk picture\n\n**The highest-priority paths combine ordinary enterprise compromise with AI lifecycle leverage.** Compromised identities can expose customer data; poisoned inputs or unauthorized model promotion can alter recommendations at scale; a compromised dependency can reach build credentials, training, model artifacts and serving."},
+      {"id": "risk-chart", "type": "chart", "layout": "full", "chartId": "risk-distribution"},
+      {"id": "risk-table", "type": "table", "layout": "full", "tableId": "priority-risks"},
+      {"id": "evidence", "type": "markdown", "layout": "full", "sourceId": "automated-evidence", "body": "## Evidence completed\n\nThe laboratory includes a reproducible synthetic dataset and model, authenticated and validated FastAPI inference, model-artifact digest verification, advisory-only human review, drift and group-performance procedures, OWASP Threat Dragon modeling, NIST OSCAL validation, pytest, Ruff, Bandit, pip-audit, Trivy and Syft evidence.\n\n**Automated checks prove bounded procedures, not production control effectiveness.** The final images contain three critical and thirteen high Debian advisories per image, all currently unfixed; Trivy found no image secrets or configuration findings. Runtime pip and setuptools were removed to reduce attack surface."},
+      {"id": "next-steps", "type": "markdown", "layout": "full", "body": "## Recommended next steps\n\n1. **Confirm scope and accountability:** business purpose, users, decisions, prohibited uses, data, third parties, owners and risk appetite.\n2. **Run all five EBIOS workshops:** replace assumptions, validate sources/scenarios, agree severity/plausibility and assign treatments.\n3. **Assess production controls:** identity, least privilege, encryption, logging, lineage, approval/promotion, rollback, resilience and incident response.\n4. **Define AI acceptance criteria:** validity, calibration, segment performance, drift, latency, availability, explanation, override, contest and redress.\n5. **Close supply-chain gaps:** immutable trusted sources, lock/hashes, vulnerability and license triage, isolated builds, signed provenance and policy enforcement.\n6. **Authorize or reject explicitly:** an accountable human records residual risk, conditions and expiry only after evidence and retest."},
+      {"id": "questions", "type": "markdown", "layout": "full", "body": "## Further questions\n\n- Which real decision is influenced, and can a recommendation disadvantage a person or customer?\n- Is the interface internal-only, and which identities can read data, train, approve, deploy or audit?\n- Which customer fields, labels and sensitive/proxy attributes are used, retained or logged?\n- Who supplies code, models, data and infrastructure, and what provenance is verified?\n- What accuracy, calibration, group-performance, drift, availability and abuse thresholds stop the system?\n- Who may override, contest, investigate, roll back and accept residual risk?"},
+      {"id": "caveats", "type": "markdown", "layout": "full", "body": "## Caveats and assumptions\n\n- All business and production-system facts are assumptions until stakeholder validation.\n- Risk scores are ordinal workshop inputs, not measured probabilities or financial loss estimates.\n- Synthetic model metrics do not establish business fitness, fairness, safety or legal compliance.\n- A SHA-256 manifest detects alteration only if the manifest and verification root are trusted.\n- Scanners can miss vulnerabilities and can surface non-runtime components; raw evidence and triage rationale are both retained.\n- Selected NIST controls require organizational tailoring, implementation statements, assessment and authorization."},
+      {"id": "method", "type": "markdown", "layout": "full", "body": "## Method and authoritative references\n\nThe assessment connects the [ANSSI EBIOS Risk Manager method](https://messervices.cyber.gouv.fr/guides/en-ebios-risk-manager-method) to the [NIST Risk Management Framework](https://csrc.nist.gov/projects/risk-management/about-rmf), [NIST SP 800-53 Rev. 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final), and the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework). Threat research is mapped to [MITRE ATLAS](https://atlas.mitre.org/) and the [OWASP Machine Learning Security Top 10](https://owasp.org/www-project-machine-learning-security-top-10/)."}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-26T07:12:37Z",
+    "status": "ready",
+    "datasets": {
+      "risk_summary": [{"risk_count": 10, "critical_count": 5}],
+      "risk_distribution": [
+        {"rating": "Critical", "count": 5},
+        {"rating": "High", "count": 4},
+        {"rating": "Medium", "count": 1}
+      ],
+      "control_summary": [{"control_count": 38}],
+      "evidence_summary": [{"passing_tests": 9, "unfixed_critical": 3, "unfixed_high": 13}],
+      "priority_risks": [
+        {"risk_id": "R-01", "title": "Customer data disclosure through compromised identity or service", "score": 12, "treatment": "Reduce", "target_gate": "Before pilot"},
+        {"risk_id": "R-02", "title": "Training data poisoning or corruption", "score": 12, "treatment": "Reduce", "target_gate": "Before pilot"},
+        {"risk_id": "R-03", "title": "Open-source AI/software supply-chain compromise", "score": 12, "treatment": "Reduce", "target_gate": "Before pilot"},
+        {"risk_id": "R-04", "title": "Unauthorized model modification or deployment", "score": 12, "treatment": "Reduce", "target_gate": "Before pilot"},
+        {"risk_id": "R-09", "title": "Privileged insider misuse across data, model or administration", "score": 12, "treatment": "Reduce", "target_gate": "Before pilot"}
+      ]
+    }
+  },
+  "sources": [
+    {"id": "risk-register", "label": "Provisional risk register", "path": "risk-register/risks.csv"},
+    {"id": "nist-controls", "label": "Selected NIST SP 800-53 controls", "path": "nist/controls.csv"},
+    {"id": "automated-evidence", "label": "Automated evidence summary", "path": "evidence/security-tests/summary.md"},
+    {"id": "risk-query", "label": "Risk report transformations", "path": "report/queries/risk_metrics.sql"},
+    {"id": "control-query", "label": "Control report transformation", "path": "report/queries/control_metrics.sql"},
+    {"id": "evidence-query", "label": "Evidence report transformation", "path": "report/queries/evidence_metrics.sql"},
+    {"id": "anssi-ebios", "label": "ANSSI EBIOS Risk Manager method", "href": "https://messervices.cyber.gouv.fr/guides/en-ebios-risk-manager-method"},
+    {"id": "nist-rmf", "label": "NIST Risk Management Framework", "href": "https://csrc.nist.gov/projects/risk-management/about-rmf"},
+    {"id": "nist-ai-rmf", "label": "NIST AI Risk Management Framework", "href": "https://www.nist.gov/itl/ai-risk-management-framework"}
+  ]
+}

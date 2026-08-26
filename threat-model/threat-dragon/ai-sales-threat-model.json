@@ -1,0 +1,113 @@
+{
+  "version": "2.0",
+  "summary": {
+    "title": "AI Sales Recommendation System — Reference Threat Model",
+    "owner": "[DECISION REQUIRED] System owner",
+    "description": "Synthetic reference DFD. All architecture is assumed until confirmed. Threat titles include risk IDs for traceability.",
+    "id": "ai-sales-reference"
+  },
+  "detail": {
+    "contributors": [{"name": "Codex-generated draft; requires human review"}],
+    "reviewer": "[DECISION REQUIRED] Independent reviewer",
+    "diagramTop": 1,
+    "threatTop": 8,
+    "diagrams": [
+      {
+        "id": 0,
+        "version": "2.0",
+        "title": "AI Sales Security DFD",
+        "description": "Reference training and inference lifecycle with synthetic/lab components.",
+        "diagramType": "STRIDE",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "cells": [
+          {
+            "position": {"x": 30, "y": 300}, "size": {"width": 150, "height": 80},
+            "attrs": {"text": {"text": "Salesperson"}, "body": {"stroke": "#333333", "strokeWidth": 1, "strokeDasharray": null}},
+            "shape": "actor", "zIndex": 1, "id": "11111111-1111-4111-8111-111111111111",
+            "data": {"name": "Salesperson", "description": "[ASSUMPTION] Authenticated internal user and final decision maker.", "type": "tm.Actor", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "providesAuthentication": false, "hasOpenThreats": false, "threats": []}
+          },
+          {
+            "position": {"x": 240, "y": 290}, "size": {"width": 110, "height": 100},
+            "attrs": {"text": {"text": "Sales UI"}, "body": {"stroke": "#333333", "strokeWidth": 1, "strokeDasharray": null}},
+            "shape": "process", "zIndex": 2, "id": "22222222-2222-4222-8222-222222222222",
+            "data": {"name": "Sales UI", "description": "[ASSUMPTION] Displays versioned recommendation and human-review cue.", "type": "tm.Process", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "hasOpenThreats": false, "threats": []}
+          },
+          {
+            "position": {"x": 430, "y": 290}, "size": {"width": 110, "height": 100},
+            "attrs": {"text": {"text": "Recommendation API"}, "body": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}},
+            "shape": "process", "zIndex": 3, "id": "33333333-3333-4333-8333-333333333333",
+            "data": {"name": "Recommendation API", "description": "Authenticated and validated inference boundary.", "type": "tm.Process", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "hasOpenThreats": true,
+              "threats": [
+                {"id": "a1111111-1111-4111-8111-111111111111", "title": "R-01 Spoofed or overprivileged caller", "type": "Spoofing", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "A compromised or overprivileged identity may access customer-linked inference or administrative functionality.", "mitigation": "Enterprise SSO/MFA, resource authorization, least privilege, access review and anomaly monitoring. Lab API-key checks are not production identity."},
+                {"id": "a2222222-2222-4222-8222-222222222222", "title": "R-05 Adaptive query extraction", "type": "Information disclosure", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "Repeated queries and detailed outputs may enable model extraction, inversion or membership inference.", "mitigation": "Minimize outputs and precision; purpose authorization; rate/query-pattern controls; privacy testing and alerts."},
+                {"id": "a3333333-3333-4333-8333-333333333333", "title": "R-06 Resource exhaustion", "type": "Denial of service", "modelType": "STRIDE", "status": "Open", "severity": "Medium", "description": "Costly or excessive requests may exhaust inference capacity.", "mitigation": "Input-size and rate limits, quotas, timeouts, capacity controls, health alerts and manual fallback."}
+              ]}
+          },
+          {
+            "position": {"x": 660, "y": 300}, "size": {"width": 160, "height": 80},
+            "attrs": {"text": {"text": "Approved Model Registry"}, "topLine": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}, "bottomLine": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}},
+            "shape": "store", "zIndex": 4, "id": "44444444-4444-4444-8444-444444444444",
+            "data": {"name": "Approved Model Registry", "description": "Model artifact, metadata, approval and provenance.", "type": "tm.Store", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "isALog": false, "storesCredentials": false, "isEncrypted": false, "isSigned": true, "hasOpenThreats": true,
+              "threats": [
+                {"id": "a4444444-4444-4444-8444-444444444444", "title": "R-04 Unauthorized model replacement", "type": "Tampering", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "An unauthorized actor may replace a promoted artifact or its verification metadata and change recommendation behavior.", "mitigation": "Separate build/validate/approve/deploy roles; immutable registry; signed provenance with protected trust root; deployment allowlist; audit and rollback."}
+              ]}
+          },
+          {
+            "position": {"x": 430, "y": 80}, "size": {"width": 110, "height": 100},
+            "attrs": {"text": {"text": "Training Pipeline"}, "body": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}},
+            "shape": "process", "zIndex": 5, "id": "55555555-5555-4555-8555-555555555555",
+            "data": {"name": "Training Pipeline", "description": "Data preparation, training, validation and candidate artifact creation.", "type": "tm.Process", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "hasOpenThreats": true,
+              "threats": [
+                {"id": "a5555555-5555-4555-8555-555555555555", "title": "R-02 Poisoned training records or labels", "type": "Tampering", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "Authorized or compromised source/pipeline access may introduce targeted or broad integrity failures.", "mitigation": "Versioned immutable snapshots, schema/label/distribution tests, data digest, separation, independent validation and approval."},
+                {"id": "a6666666-6666-4666-8666-666666666666", "title": "R-03 Malicious open-source component", "type": "Elevation of privilege", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "A malicious package/model may execute in the build or training environment and steal credentials or alter artifacts.", "mitigation": "Trusted registries, pinning/hashes, SBOM, scanning, provenance, isolated build, short-lived credentials and safe model format."}
+              ]}
+          },
+          {
+            "position": {"x": 660, "y": 80}, "size": {"width": 160, "height": 80},
+            "attrs": {"text": {"text": "Training Data"}, "topLine": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}, "bottomLine": {"stroke": "red", "strokeWidth": 3, "strokeDasharray": null}},
+            "shape": "store", "zIndex": 6, "id": "66666666-6666-4666-8666-666666666666",
+            "data": {"name": "Training Data", "description": "[ASSUMPTION] Versioned customer/sales features and outcomes.", "type": "tm.Store", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "isALog": false, "storesCredentials": false, "isEncrypted": false, "isSigned": true, "hasOpenThreats": false, "threats": []}
+          },
+          {
+            "position": {"x": 190, "y": 80}, "size": {"width": 160, "height": 80},
+            "attrs": {"text": {"text": "OSS Repositories"}, "body": {"stroke": "#333333", "strokeWidth": 1, "strokeDasharray": null}},
+            "shape": "actor", "zIndex": 7, "id": "77777777-7777-4777-8777-777777777777",
+            "data": {"name": "OSS Repositories", "description": "External packages and model inputs.", "type": "tm.Actor", "isTrustBoundary": false, "outOfScope": false, "reasonOutOfScope": "", "providesAuthentication": false, "hasOpenThreats": false, "threats": []}
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "#333333", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f1111111-1111-4111-8111-111111111111",
+            "data": {"type": "tm.Flow", "name": "Decision support", "description": "Recommendation shown to salesperson.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "HTTPS", "isEncrypted": true, "isPublicNetwork": false, "isBidirectional": true, "isTrustBoundary": false, "hasOpenThreats": false, "threats": []},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "Decision support (HTTPS)"}}}], "source": {"cell": "22222222-2222-4222-8222-222222222222"}, "target": {"cell": "11111111-1111-4111-8111-111111111111"}, "vertices": []
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "#333333", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f2222222-2222-4222-8222-222222222222",
+            "data": {"type": "tm.Flow", "name": "Authenticated request/response", "description": "Customer features and versioned recommendation.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "HTTPS", "isEncrypted": true, "isPublicNetwork": false, "isBidirectional": true, "isTrustBoundary": false, "hasOpenThreats": false, "threats": []},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "Authenticated inference (HTTPS)"}}}], "source": {"cell": "22222222-2222-4222-8222-222222222222"}, "target": {"cell": "33333333-3333-4333-8333-333333333333"}, "vertices": []
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "red", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f3333333-3333-4333-8333-333333333333",
+            "data": {"type": "tm.Flow", "name": "Approved model", "description": "Integrity-verified artifact.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "Registry API", "isEncrypted": true, "isPublicNetwork": false, "isBidirectional": false, "isTrustBoundary": false, "hasOpenThreats": true,
+              "threats": [{"id": "a7777777-7777-4777-8777-777777777777", "title": "R-04 Artifact or manifest tampering in transit", "type": "Tampering", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "The API could load an unauthorized model if registry transport or verification metadata is compromised.", "mitigation": "Mutual authentication, signed artifact verification with protected trust root, version allowlist and deployment audit."}]},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "Approved model"}}}], "source": {"cell": "44444444-4444-4444-8444-444444444444"}, "target": {"cell": "33333333-3333-4333-8333-333333333333"}, "vertices": []
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "#333333", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f4444444-4444-4444-8444-444444444444",
+            "data": {"type": "tm.Flow", "name": "Candidate model + metrics", "description": "Promotion input.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "Registry API", "isEncrypted": true, "isPublicNetwork": false, "isBidirectional": false, "isTrustBoundary": false, "hasOpenThreats": false, "threats": []},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "Candidate + evidence"}}}], "source": {"cell": "55555555-5555-4555-8555-555555555555"}, "target": {"cell": "44444444-4444-4444-8444-444444444444"}, "vertices": []
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "#333333", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f5555555-5555-4555-8555-555555555555",
+            "data": {"type": "tm.Flow", "name": "Versioned dataset", "description": "Validated training snapshot.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "Database/object API", "isEncrypted": true, "isPublicNetwork": false, "isBidirectional": false, "isTrustBoundary": false, "hasOpenThreats": false, "threats": []},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "Versioned dataset"}}}], "source": {"cell": "66666666-6666-4666-8666-666666666666"}, "target": {"cell": "55555555-5555-4555-8555-555555555555"}, "vertices": []
+          },
+          {
+            "shape": "flow", "attrs": {"line": {"stroke": "red", "strokeWidth": 1, "targetMarker": {"name": "block"}, "strokeDasharray": null}}, "width": 200, "height": 100, "zIndex": 10, "connector": "smooth", "id": "f6666666-6666-4666-8666-666666666666",
+            "data": {"type": "tm.Flow", "name": "Packages/models", "description": "External supply-chain input.", "outOfScope": false, "reasonOutOfScope": "", "protocol": "HTTPS", "isEncrypted": true, "isPublicNetwork": true, "isBidirectional": false, "isTrustBoundary": false, "hasOpenThreats": true,
+              "threats": [{"id": "a8888888-8888-4888-8888-888888888888", "title": "R-03 Untrusted dependency accepted", "type": "Tampering", "modelType": "STRIDE", "status": "Open", "severity": "High", "description": "A malicious or substituted package/model may be accepted because transport encryption does not establish component provenance.", "mitigation": "Trusted source policy, pinned digest, signature/provenance verification, SBOM, scanning, review and isolated build."}]},
+            "labels": [{"position": 0.5, "attrs": {"label": {"text": "OSS packages/models (HTTPS)"}}}], "source": {"cell": "77777777-7777-4777-8777-777777777777"}, "target": {"cell": "55555555-5555-4555-8555-555555555555"}, "vertices": []
+          }
+        ]
+      }
+    ]
+  }
+}

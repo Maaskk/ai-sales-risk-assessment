@@ -1,0 +1,98 @@
+name: ai-sales-risk-lab
+
+services:
+  db:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sales_lab}
+      POSTGRES_USER: ${POSTGRES_USER:-sales_lab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-lab-change-me}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./prototype/database/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [data-zone]
+    security_opt: ["no-new-privileges:true"]
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.15.1
+    command: >-
+      mlflow server --host 0.0.0.0 --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --artifacts-destination /mlflow/artifacts
+    volumes:
+      - mlflow-data:/mlflow
+    ports: ["127.0.0.1:5001:5000"]
+    networks: [ml-zone]
+    security_opt: ["no-new-privileges:true"]
+
+  trainer:
+    build:
+      context: .
+      dockerfile: prototype/docker/Dockerfile.trainer
+    command: ["python", "prototype/model/train.py"]
+    environment:
+      MODEL_DIR: /app/model
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+    volumes:
+      - model-data:/app/model
+    depends_on:
+      mlflow:
+        condition: service_started
+    networks: [ml-zone]
+    read_only: true
+    tmpfs: ["/tmp"]
+    security_opt: ["no-new-privileges:true"]
+
+  api:
+    build:
+      context: .
+      dockerfile: prototype/docker/Dockerfile.api
+    environment:
+      API_KEY: ${API_KEY:-local-development-only}
+      MODEL_DIR: /app/model
+      LOG_LEVEL: INFO
+    volumes:
+      - model-data:/app/model:ro
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      trainer:
+        condition: service_completed_successfully
+    networks: [app-zone, ml-zone]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: prototype/docker/Dockerfile.dashboard
+    environment:
+      API_URL: http://api:8000
+      API_KEY: ${API_KEY:-local-development-only}
+    ports: ["127.0.0.1:8501:8501"]
+    depends_on:
+      api:
+        condition: service_started
+    networks: [app-zone]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+
+networks:
+  app-zone:
+    internal: true
+  data-zone:
+    internal: true
+  ml-zone: {}
+
+volumes:
+  postgres-data:
+  mlflow-data:
+  model-data:
