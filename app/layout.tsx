@@ -4,8 +4,8 @@ import { Navigation } from "@/components/Navigation";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "AI Sales Risk Assessment", template: "%s | AI Sales Risk Assessment" },
-  description: "EBIOS RM, NIST RMF and AI risk assessment for a synthetic sales recommendation system.",
+  title: { default: "Sales Product Recommendation", template: "%s | Sales Product Recommendation" },
+  description: "Internal product recommendation dashboard backed by a synthetic open source prediction model.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

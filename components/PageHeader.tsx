@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
-export function PageHeader({ title, description, actions }: { title: string; description: string; actions?: ReactNode }) {
+export function PageHeader({ title, description, actions, eyebrow = "Internal sales recommendation system" }: { title: string; description: string; actions?: ReactNode; eyebrow?: string }) {
   return (
     <header className="page-header">
       <div>
-        <p className="eyebrow">AI Sales Risk Assessment</p>
+        <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         <p>{description}</p>
       </div>
