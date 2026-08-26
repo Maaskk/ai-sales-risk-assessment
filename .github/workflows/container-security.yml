@@ -1,0 +1,102 @@
+name: Container security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: container-security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-scan:
+    name: Repository security scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Trivy repository evidence (all findings)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          format: json
+          output: trivy-repository.json
+          severity: CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN
+          exit-code: "0"
+
+      - name: Gate on actionable HIGH/CRITICAL repository findings
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          format: table
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: "1"
+
+      - name: Upload repository scan
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: trivy-repository-${{ github.run_id }}
+          path: trivy-repository.json
+          retention-days: 14
+          if-no-files-found: error
+
+  image-scan:
+    name: Image scan - ${{ matrix.service }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [api, trainer, dashboard]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Build ${{ matrix.service }} image
+        run: |
+          docker build             --file "prototype/docker/Dockerfile.${{ matrix.service }}"             --tag "ai-sales-${{ matrix.service }}:${{ github.sha }}"             .
+
+      - name: Capture complete image scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ai-sales-${{ matrix.service }}:${{ github.sha }}
+          format: json
+          output: trivy-${{ matrix.service }}-image.json
+          scanners: vuln,secret,misconfig
+          severity: CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN
+          exit-code: "0"
+
+      - name: Gate on fixed HIGH/CRITICAL vulnerabilities
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ai-sales-${{ matrix.service }}:${{ github.sha }}
+          format: table
+          scanners: vuln
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: "1"
+
+      - name: Upload image scan
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: trivy-${{ matrix.service }}-${{ github.run_id }}
+          path: trivy-${{ matrix.service }}-image.json
+          retention-days: 14
+          if-no-files-found: error
