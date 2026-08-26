@@ -15,6 +15,6 @@ COPY --chown=app:app prototype /app/prototype
 COPY --chown=app:app data /app/data
 USER app
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=3s --start-period=15s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=2)"
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD awk '$2 ~ /:1F40$/ && $4 == "0A" {found=1} END{exit !found}' /proc/net/tcp
 CMD ["uvicorn", "prototype.api.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
