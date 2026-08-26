@@ -1,0 +1,54 @@
+{
+  "accuracy": 0.6488888888888888,
+  "accuracy_by_segment": {
+    "consumer": 0.5194805194805194,
+    "enterprise": 0.6571428571428571,
+    "small_business": 0.7692307692307693
+  },
+  "classification_report": {
+    "accuracy": 0.6488888888888888,
+    "macro avg": {
+      "f1-score": 0.5893060171179085,
+      "precision": 0.6023728006086656,
+      "recall": 0.6303469678469679,
+      "support": 225.0
+    },
+    "product_a": {
+      "f1-score": 0.7982062780269058,
+      "precision": 0.839622641509434,
+      "recall": 0.7606837606837606,
+      "support": 117.0
+    },
+    "product_b": {
+      "f1-score": 0.5652173913043478,
+      "precision": 0.6724137931034483,
+      "recall": 0.4875,
+      "support": 80.0
+    },
+    "product_c": {
+      "f1-score": 0.4044943820224719,
+      "precision": 0.29508196721311475,
+      "recall": 0.6428571428571429,
+      "support": 28.0
+    },
+    "weighted avg": {
+      "f1-score": 0.6663705268005556,
+      "precision": 0.7124055448304304,
+      "recall": 0.6488888888888888,
+      "support": 225.0
+    }
+  },
+  "dataset": "data/synthetic/sales_training.csv",
+  "dataset_sha256": "638133b3aa94798b06d2680e1486a047e397d2926a69d364add4022c874fc817",
+  "limitations": [
+    "Synthetic data and labels do not establish business validity.",
+    "Group accuracy is only a demonstration signal and is not proof of fairness.",
+    "Random split does not replace temporal or out-of-population validation."
+  ],
+  "model_sha256": "061650daf641ec2c8001e0a116838ca026479301d15d10f1fca8f1a9d70284d1",
+  "model_version": "synthetic-20260826133013",
+  "python_version": "3.12.13",
+  "rows": 900,
+  "scikit_learn_version": "1.9.0",
+  "test_rows": 225
+}

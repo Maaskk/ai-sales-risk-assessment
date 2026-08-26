@@ -1,0 +1,1856 @@
+{
+  "generated_at": "2026-08-26T13:51:19.526Z",
+  "assessment": {
+    "name": "AI Sales Risk Assessment",
+    "status": "Reference assessment",
+    "description": "Cybersecurity and AI risk assessment for a synthetic sales recommendation system."
+  },
+  "risks": [
+    {
+      "risk_id": "R-01",
+      "title": "Customer data disclosure through compromised identity or service",
+      "feared_event": "FE-01",
+      "strategic_scenario": "SS-01",
+      "operational_scenario": "OS-01",
+      "risk_source": "Cybercriminal or insider",
+      "severity": 4,
+      "likelihood": 3,
+      "inherent_score": 12,
+      "inherent_rating": "Critical",
+      "treatment": "Reduce",
+      "control_ids": [
+        "AC-2",
+        "AC-3",
+        "AC-6",
+        "IA-2",
+        "AU-2",
+        "SC-8",
+        "SC-28"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 2,
+      "residual_score": 8,
+      "residual_rating": "High",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] System/Data Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Severe privacy/trust impact; identity attacks are credible while real IAM and data exposure are unknown."
+    },
+    {
+      "risk_id": "R-02",
+      "title": "Training data poisoning or corruption",
+      "feared_event": "FE-02; FE-03; FE-06",
+      "strategic_scenario": "SS-03",
+      "operational_scenario": "OS-02",
+      "risk_source": "Insider supply chain or process failure",
+      "severity": 4,
+      "likelihood": 3,
+      "inherent_score": 12,
+      "inherent_rating": "Critical",
+      "treatment": "Reduce",
+      "control_ids": [
+        "CM-3",
+        "SA-10",
+        "SI-7",
+        "SI-10",
+        "RA-3"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 1,
+      "residual_score": 4,
+      "residual_rating": "Medium",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Data/Model Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Corruption may scale into systematic recommendations; real lineage validation and approvals are unknown."
+    },
+    {
+      "risk_id": "R-03",
+      "title": "Open-source AI/software supply-chain compromise",
+      "feared_event": "FE-01; FE-02; FE-03; FE-04",
+      "strategic_scenario": "SS-02",
+      "operational_scenario": "OS-03",
+      "risk_source": "Supply-chain attacker",
+      "severity": 4,
+      "likelihood": 3,
+      "inherent_score": 12,
+      "inherent_rating": "Critical",
+      "treatment": "Reduce",
+      "control_ids": [
+        "SA-12",
+        "SR-3",
+        "SR-4",
+        "SR-11",
+        "SI-2",
+        "SI-7"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 1,
+      "residual_score": 4,
+      "residual_rating": "Medium",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Engineering/Supply-Chain Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Open-source reliance is known but exact sources provenance build isolation and credentials are unknown."
+    },
+    {
+      "risk_id": "R-04",
+      "title": "Unauthorized model modification or deployment",
+      "feared_event": "FE-03; FE-07",
+      "strategic_scenario": "SS-04",
+      "operational_scenario": "OS-04",
+      "risk_source": "Privileged insider or compromised admin",
+      "severity": 4,
+      "likelihood": 3,
+      "inherent_score": 12,
+      "inherent_rating": "Critical",
+      "treatment": "Reduce",
+      "control_ids": [
+        "AC-5",
+        "AC-6",
+        "AU-2",
+        "CM-3",
+        "CM-5",
+        "SI-7"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 1,
+      "residual_score": 4,
+      "residual_rating": "Medium",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Model/System Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] A privileged change can affect recommendations at scale; promotion controls are unknown."
+    },
+    {
+      "risk_id": "R-05",
+      "title": "Model extraction or inference privacy attack",
+      "feared_event": "FE-01; FE-05",
+      "strategic_scenario": "SS-05",
+      "operational_scenario": "OS-05",
+      "risk_source": "Competitor or API abuser",
+      "severity": 3,
+      "likelihood": 3,
+      "inherent_score": 9,
+      "inherent_rating": "High",
+      "treatment": "Reduce",
+      "control_ids": [
+        "AC-3",
+        "AU-6",
+        "SC-7",
+        "SI-4",
+        "SI-10"
+      ],
+      "residual_severity": 3,
+      "residual_likelihood": 2,
+      "residual_score": 6,
+      "residual_rating": "Medium",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Model/Data Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Feasibility depends on interface access output precision rate limits and training-data sensitivity."
+    },
+    {
+      "risk_id": "R-06",
+      "title": "Recommendation service denial or dependency outage",
+      "feared_event": "FE-04",
+      "strategic_scenario": "SS-06",
+      "operational_scenario": "OS-06",
+      "risk_source": "External abuser or process failure",
+      "severity": 3,
+      "likelihood": 3,
+      "inherent_score": 9,
+      "inherent_rating": "High",
+      "treatment": "Reduce",
+      "control_ids": [
+        "CP-2",
+        "CP-10",
+        "SC-5",
+        "SI-13"
+      ],
+      "residual_severity": 3,
+      "residual_likelihood": 1,
+      "residual_score": 3,
+      "residual_rating": "Low",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Service Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Business impact and fallback/RTO are unknown; exposed APIs and AI compute can be resource constrained."
+    },
+    {
+      "risk_id": "R-07",
+      "title": "Unfair or invalid group performance",
+      "feared_event": "FE-06",
+      "strategic_scenario": "SS-07",
+      "operational_scenario": "OS-07",
+      "risk_source": "Process/data failure",
+      "severity": 4,
+      "likelihood": 2,
+      "inherent_score": 8,
+      "inherent_rating": "High",
+      "treatment": "Reduce",
+      "control_ids": [
+        "CA-2",
+        "PM-9",
+        "RA-3",
+        "SA-8",
+        "SI-4"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 1,
+      "residual_score": 4,
+      "residual_rating": "Medium",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Business/Model-Risk Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Customer impact is potentially severe; actual groups uses thresholds and legal context are unknown."
+    },
+    {
+      "risk_id": "R-08",
+      "title": "Undetected model/data drift degrades recommendations",
+      "feared_event": "FE-06",
+      "strategic_scenario": "SS-07",
+      "operational_scenario": "OS-07",
+      "risk_source": "Process failure",
+      "severity": 3,
+      "likelihood": 3,
+      "inherent_score": 9,
+      "inherent_rating": "High",
+      "treatment": "Reduce",
+      "control_ids": [
+        "CA-7",
+        "SI-4",
+        "SI-13"
+      ],
+      "residual_severity": 3,
+      "residual_likelihood": 1,
+      "residual_score": 3,
+      "residual_rating": "Low",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Model Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Periodic use implies drift can occur; monitoring and retraining triggers are unknown."
+    },
+    {
+      "risk_id": "R-09",
+      "title": "Privileged insider misuse across data model or administration",
+      "feared_event": "FE-01; FE-02; FE-03; FE-05; FE-07",
+      "strategic_scenario": "SS-01; SS-04",
+      "operational_scenario": "OS-01; OS-04",
+      "risk_source": "Malicious or coerced insider",
+      "severity": 4,
+      "likelihood": 3,
+      "inherent_score": 12,
+      "inherent_rating": "Critical",
+      "treatment": "Reduce",
+      "control_ids": [
+        "AC-2",
+        "AC-5",
+        "AC-6",
+        "AU-6",
+        "CM-5",
+        "IA-2"
+      ],
+      "residual_severity": 4,
+      "residual_likelihood": 2,
+      "residual_score": 8,
+      "residual_rating": "High",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Security/System Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] Privileged access is necessary somewhere in the lifecycle; actual separation monitoring and reviews are unknown."
+    },
+    {
+      "risk_id": "R-10",
+      "title": "Sensitive data leakage through logs and evidence",
+      "feared_event": "FE-01; FE-07",
+      "strategic_scenario": "SS-08",
+      "operational_scenario": "OS-08",
+      "risk_source": "Insider or process failure",
+      "severity": 3,
+      "likelihood": 2,
+      "inherent_score": 6,
+      "inherent_rating": "Medium",
+      "treatment": "Reduce",
+      "control_ids": [
+        "AU-3",
+        "AU-9",
+        "AU-11",
+        "PT-2",
+        "SI-12"
+      ],
+      "residual_severity": 3,
+      "residual_likelihood": 1,
+      "residual_score": 3,
+      "residual_rating": "Low",
+      "residual_status": "Projected",
+      "owner": "[DECISION REQUIRED] Privacy/Logging Owner",
+      "status": "Open",
+      "rationale": "[ASSUMPTION] ML observability may collect high-dimensional request/output data; log schema and access are unknown."
+    }
+  ],
+  "controls": [
+    {
+      "control_id": "AC-2",
+      "title": "Account Management",
+      "risk_ids": [
+        "R-01",
+        "R-09"
+      ],
+      "control_objective": "Provision review and remove human/service accounts across data ML registry API and logging",
+      "reference_implementation": "Enterprise lifecycle plus non-shared service identities",
+      "production_status": "Not assessed",
+      "evidence_required": "Account inventory; lifecycle tickets; periodic review",
+      "family": "AC"
+    },
+    {
+      "control_id": "AC-3",
+      "title": "Access Enforcement",
+      "risk_ids": [
+        "R-01",
+        "R-05"
+      ],
+      "control_objective": "Enforce authorized purpose and role at every interface",
+      "reference_implementation": "Gateway/IAM policy and resource-level checks; lab API key demonstrates only a boundary",
+      "production_status": "Prototype partial",
+      "evidence_required": "Policy/configuration; positive and negative authorization tests",
+      "family": "AC"
+    },
+    {
+      "control_id": "AC-5",
+      "title": "Separation of Duties",
+      "risk_ids": [
+        "R-04",
+        "R-09"
+      ],
+      "control_objective": "Separate data change model development validation approval and deployment",
+      "reference_implementation": "Two-person promotion and independent validation",
+      "production_status": "Not assessed",
+      "evidence_required": "Role matrix; approvals; denied-action test",
+      "family": "AC"
+    },
+    {
+      "control_id": "AC-6",
+      "title": "Least Privilege",
+      "risk_ids": [
+        "R-01",
+        "R-04",
+        "R-09"
+      ],
+      "control_objective": "Grant minimum data model deployment and log access",
+      "reference_implementation": "Scoped roles and short-lived workload identities",
+      "production_status": "Not assessed",
+      "evidence_required": "Role grants; access review; token claims",
+      "family": "AC"
+    },
+    {
+      "control_id": "AU-2",
+      "title": "Event Logging",
+      "risk_ids": [
+        "R-01",
+        "R-04",
+        "R-09"
+      ],
+      "control_objective": "Define and log security and model-lifecycle events",
+      "reference_implementation": "Lab emits request/model/outcome metadata without raw feature body",
+      "production_status": "Prototype partial",
+      "evidence_required": "Event catalog; sample logs; stakeholder approval",
+      "family": "AU"
+    },
+    {
+      "control_id": "AU-3",
+      "title": "Content of Audit Records",
+      "risk_ids": [
+        "R-10"
+      ],
+      "control_objective": "Record who what when where result and model/version context",
+      "reference_implementation": "Structured lab events include request ID action result and model version",
+      "production_status": "Prototype partial",
+      "evidence_required": "Schema test; sample redacted records",
+      "family": "AU"
+    },
+    {
+      "control_id": "AU-6",
+      "title": "Audit Record Review Analysis and Reporting",
+      "risk_ids": [
+        "R-01",
+        "R-05",
+        "R-09"
+      ],
+      "control_objective": "Detect abnormal access export query and administrative behavior",
+      "reference_implementation": "Alerts for query bursts exports failed integrity and model promotion",
+      "production_status": "Not assessed",
+      "evidence_required": "Detection rules; alert simulation; tickets",
+      "family": "AU"
+    },
+    {
+      "control_id": "AU-9",
+      "title": "Protection of Audit Information",
+      "risk_ids": [
+        "R-09",
+        "R-10"
+      ],
+      "control_objective": "Prevent unauthorized log access modification and deletion",
+      "reference_implementation": "Restricted append-only central logging",
+      "production_status": "Not assessed",
+      "evidence_required": "ACL; immutability configuration; test",
+      "family": "AU"
+    },
+    {
+      "control_id": "AU-11",
+      "title": "Audit Record Retention",
+      "risk_ids": [
+        "R-10"
+      ],
+      "control_objective": "Retain audit data for approved security legal and privacy needs",
+      "reference_implementation": "Documented retention with deletion and legal-hold rules",
+      "production_status": "Not assessed",
+      "evidence_required": "Retention settings; deletion test; approval",
+      "family": "AU"
+    },
+    {
+      "control_id": "CA-2",
+      "title": "Control Assessments",
+      "risk_ids": [
+        "R-07"
+      ],
+      "control_objective": "Independently assess selected security privacy and model-risk controls",
+      "reference_implementation": "Use this assessment plan with qualified independent reviewers",
+      "production_status": "Not assessed",
+      "evidence_required": "Assessment report; findings; assessor independence",
+      "family": "CA"
+    },
+    {
+      "control_id": "CA-7",
+      "title": "Continuous Monitoring",
+      "risk_ids": [
+        "R-08"
+      ],
+      "control_objective": "Monitor controls system changes vulnerabilities quality and risk",
+      "reference_implementation": "Drift quality abuse security and availability metrics with triggers",
+      "production_status": "Prototype partial",
+      "evidence_required": "Strategy; dashboards; alerts; review minutes",
+      "family": "CA"
+    },
+    {
+      "control_id": "CM-3",
+      "title": "Configuration Change Control",
+      "risk_ids": [
+        "R-02",
+        "R-04"
+      ],
+      "control_objective": "Review approve test and record data feature model threshold and deployment changes",
+      "reference_implementation": "Pull requests plus protected approval environment",
+      "production_status": "Repository partial",
+      "evidence_required": "Change records; reviews; deployment linkage",
+      "family": "CM"
+    },
+    {
+      "control_id": "CM-5",
+      "title": "Access Restrictions for Change",
+      "risk_ids": [
+        "R-04",
+        "R-09"
+      ],
+      "control_objective": "Restrict who can modify code data models thresholds and deployment",
+      "reference_implementation": "Protected branches registry ACL and deploy role",
+      "production_status": "Repository partial",
+      "evidence_required": "Settings export; role test; audit trail",
+      "family": "CM"
+    },
+    {
+      "control_id": "CP-2",
+      "title": "Contingency Plan",
+      "risk_ids": [
+        "R-06"
+      ],
+      "control_objective": "Define service fallback recovery roles communications and exercises",
+      "reference_implementation": "Manual sales fallback and dependency/model rollback plan",
+      "production_status": "Not assessed",
+      "evidence_required": "Approved plan; exercise; lessons learned",
+      "family": "CP"
+    },
+    {
+      "control_id": "CP-10",
+      "title": "System Recovery and Reconstitution",
+      "risk_ids": [
+        "R-06"
+      ],
+      "control_objective": "Restore a known-good service and model within approved objectives",
+      "reference_implementation": "Immutable prior model and tested restore procedure",
+      "production_status": "Not assessed",
+      "evidence_required": "Restore/rollback result; timing evidence",
+      "family": "CP"
+    },
+    {
+      "control_id": "IA-2",
+      "title": "Identification and Authentication (Organizational Users)",
+      "risk_ids": [
+        "R-01",
+        "R-09"
+      ],
+      "control_objective": "Uniquely authenticate users with stronger protection for privileged access",
+      "reference_implementation": "Enterprise SSO and phishing-resistant MFA",
+      "production_status": "Not assessed",
+      "evidence_required": "IdP policy; MFA test; exception list",
+      "family": "IA"
+    },
+    {
+      "control_id": "IR-4",
+      "title": "Incident Handling",
+      "risk_ids": [
+        "R-01",
+        "R-02",
+        "R-03",
+        "R-04",
+        "R-05",
+        "R-06",
+        "R-07",
+        "R-08",
+        "R-09",
+        "R-10"
+      ],
+      "control_objective": "Coordinate detection analysis containment eradication recovery and post-incident action",
+      "reference_implementation": "AI/data/model incident playbooks linked to enterprise response",
+      "production_status": "Not assessed",
+      "evidence_required": "Tabletop; incident records; corrective actions",
+      "family": "IR"
+    },
+    {
+      "control_id": "IR-6",
+      "title": "Incident Reporting",
+      "risk_ids": [
+        "R-01",
+        "R-03",
+        "R-07",
+        "R-10"
+      ],
+      "control_objective": "Report security privacy supplier and AI incidents to required parties",
+      "reference_implementation": "Notification matrix with timeframes and owner",
+      "production_status": "Not assessed",
+      "evidence_required": "Matrix; exercise; reporting evidence",
+      "family": "IR"
+    },
+    {
+      "control_id": "IR-8",
+      "title": "Incident Response Plan",
+      "risk_ids": [
+        "R-01",
+        "R-02",
+        "R-03",
+        "R-04",
+        "R-05",
+        "R-06",
+        "R-07",
+        "R-08",
+        "R-09",
+        "R-10"
+      ],
+      "control_objective": "Maintain approved response plan covering AI lifecycle and dependencies",
+      "reference_implementation": "Model rollback data quarantine customer response and supplier coordination",
+      "production_status": "Not assessed",
+      "evidence_required": "Approved/versioned plan; annual review",
+      "family": "IR"
+    },
+    {
+      "control_id": "PM-9",
+      "title": "Risk Management Strategy",
+      "risk_ids": [
+        "R-07"
+      ],
+      "control_objective": "Set risk appetite methods responsibilities and decision rules",
+      "reference_implementation": "Approved AI/system risk strategy and escalation thresholds",
+      "production_status": "Not assessed",
+      "evidence_required": "Strategy; risk appetite; governance minutes",
+      "family": "PM"
+    },
+    {
+      "control_id": "PT-2",
+      "title": "Authority to Process Personally Identifiable Information",
+      "risk_ids": [
+        "R-01",
+        "R-10"
+      ],
+      "control_objective": "Document authority and purpose for each PII processing activity",
+      "reference_implementation": "Data inventory purpose/lawful-authority record and change review",
+      "production_status": "Not assessed",
+      "evidence_required": "Privacy/legal approval; data map; notice",
+      "family": "PT"
+    },
+    {
+      "control_id": "RA-3",
+      "title": "Risk Assessment",
+      "risk_ids": [
+        "R-02",
+        "R-07"
+      ],
+      "control_objective": "Maintain scenario based system and AI risk assessment",
+      "reference_implementation": "EBIOS analysis reviewed after architecture and material change",
+      "production_status": "Lab draft",
+      "evidence_required": "Approved assessment; review record; threat inputs",
+      "family": "RA"
+    },
+    {
+      "control_id": "SA-8",
+      "title": "Security and Privacy Engineering Principles",
+      "risk_ids": [
+        "R-07"
+      ],
+      "control_objective": "Apply secure privacy-preserving and human-centered design principles",
+      "reference_implementation": "Minimize outputs human review fail-safe behavior and contestability",
+      "production_status": "Prototype partial",
+      "evidence_required": "Design review; UI test; threat model",
+      "family": "SA"
+    },
+    {
+      "control_id": "SA-10",
+      "title": "Developer Configuration Management",
+      "risk_ids": [
+        "R-02"
+      ],
+      "control_objective": "Version and control code data configuration documentation and releases",
+      "reference_implementation": "Git plus dataset/model digests and release linkage",
+      "production_status": "Repository partial",
+      "evidence_required": "Repository settings; tagged release; lineage record",
+      "family": "SA"
+    },
+    {
+      "control_id": "SA-12",
+      "title": "Supply Chain Protection",
+      "risk_ids": [
+        "R-03"
+      ],
+      "control_objective": "Protect against supplier package model image and service compromise",
+      "reference_implementation": "Risk-based supplier controls trusted sources and build isolation",
+      "production_status": "Prototype partial",
+      "evidence_required": "Supplier inventory; contracts; CI configuration",
+      "family": "SA"
+    },
+    {
+      "control_id": "SC-5",
+      "title": "Denial-of-Service Protection",
+      "risk_ids": [
+        "R-06"
+      ],
+      "control_objective": "Protect capacity and degrade safely",
+      "reference_implementation": "Gateway limits timeouts quotas and manual fallback",
+      "production_status": "Prototype partial",
+      "evidence_required": "Load/abuse test; rate-limit config; fallback exercise",
+      "family": "SC"
+    },
+    {
+      "control_id": "SC-7",
+      "title": "Boundary Protection",
+      "risk_ids": [
+        "R-05"
+      ],
+      "control_objective": "Control connections and information flows across trust zones",
+      "reference_implementation": "Private endpoints egress restriction gateway and segmented ML zone",
+      "production_status": "Not assessed",
+      "evidence_required": "Network diagram; rules; connectivity tests",
+      "family": "SC"
+    },
+    {
+      "control_id": "SC-8",
+      "title": "Transmission Confidentiality and Integrity",
+      "risk_ids": [
+        "R-01"
+      ],
+      "control_objective": "Protect sensitive flows in transit",
+      "reference_implementation": "TLS with managed certificates and authenticated service links",
+      "production_status": "Not assessed",
+      "evidence_required": "TLS configuration; scan; certificate records",
+      "family": "SC"
+    },
+    {
+      "control_id": "SC-28",
+      "title": "Protection of Information at Rest",
+      "risk_ids": [
+        "R-01"
+      ],
+      "control_objective": "Protect customer training model secret and backup data at rest",
+      "reference_implementation": "Managed encryption and keys separated from data access",
+      "production_status": "Not assessed",
+      "evidence_required": "Storage/KMS configuration; key access logs",
+      "family": "SC"
+    },
+    {
+      "control_id": "SI-2",
+      "title": "Flaw Remediation",
+      "risk_ids": [
+        "R-03"
+      ],
+      "control_objective": "Identify evaluate and remediate vulnerabilities within risk-based timeframes",
+      "reference_implementation": "pip-audit Trivy advisories and tracked remediation",
+      "production_status": "Prototype partial",
+      "evidence_required": "Scan results; SLA; tickets; exceptions",
+      "family": "SI"
+    },
+    {
+      "control_id": "SI-4",
+      "title": "System Monitoring",
+      "risk_ids": [
+        "R-05",
+        "R-07",
+        "R-08"
+      ],
+      "control_objective": "Monitor security abuse quality fairness drift and failure indicators",
+      "reference_implementation": "Metrics by approved cohort plus query/admin anomalies",
+      "production_status": "Prototype partial",
+      "evidence_required": "Dashboard; thresholds; alert test; review record",
+      "family": "SI"
+    },
+    {
+      "control_id": "SI-7",
+      "title": "Software Firmware and Information Integrity",
+      "risk_ids": [
+        "R-02",
+        "R-03",
+        "R-04"
+      ],
+      "control_objective": "Detect unauthorized change to code dependencies data and model artifacts",
+      "reference_implementation": "Lab SHA-256 verification; production signed provenance",
+      "production_status": "Prototype partial",
+      "evidence_required": "Tamper test; signature/attestation; protected verification root",
+      "family": "SI"
+    },
+    {
+      "control_id": "SI-10",
+      "title": "Information Input Validation",
+      "risk_ids": [
+        "R-02",
+        "R-05"
+      ],
+      "control_objective": "Validate API data and training inputs against defined constraints",
+      "reference_implementation": "Pydantic request bounds and training schema/distribution checks",
+      "production_status": "Prototype partial",
+      "evidence_required": "Automated negative tests; data-quality report",
+      "family": "SI"
+    },
+    {
+      "control_id": "SI-12",
+      "title": "Information Management and Retention",
+      "risk_ids": [
+        "R-10"
+      ],
+      "control_objective": "Manage information through retention disposal and minimization rules",
+      "reference_implementation": "Separate minimal audit metadata from sensitive analytics data",
+      "production_status": "Not assessed",
+      "evidence_required": "Schedules; configuration; deletion evidence",
+      "family": "SI"
+    },
+    {
+      "control_id": "SI-13",
+      "title": "Predictable Failure Prevention",
+      "risk_ids": [
+        "R-06",
+        "R-08"
+      ],
+      "control_objective": "Detect and act before service/model failures cause unacceptable impact",
+      "reference_implementation": "Health capacity drift and quality thresholds with stop/rollback",
+      "production_status": "Prototype partial",
+      "evidence_required": "Thresholds; alert and rollback exercise",
+      "family": "SI"
+    },
+    {
+      "control_id": "SR-3",
+      "title": "Supply Chain Controls and Processes",
+      "risk_ids": [
+        "R-03"
+      ],
+      "control_objective": "Establish processes for supplier and component risk",
+      "reference_implementation": "Inventory assess approve monitor and offboard packages/models/vendors",
+      "production_status": "Prototype partial",
+      "evidence_required": "Procedure; inventory; reviews; exceptions",
+      "family": "SR"
+    },
+    {
+      "control_id": "SR-4",
+      "title": "Provenance",
+      "risk_ids": [
+        "R-03"
+      ],
+      "control_objective": "Record and verify origin and custody of components data and models",
+      "reference_implementation": "Dependency hashes dataset digest build identity and signed artifact",
+      "production_status": "Prototype partial",
+      "evidence_required": "SBOM; attestations; lineage; verification logs",
+      "family": "SR"
+    },
+    {
+      "control_id": "SR-11",
+      "title": "Component Authenticity",
+      "risk_ids": [
+        "R-03"
+      ],
+      "control_objective": "Verify components are genuine before use",
+      "reference_implementation": "Signature/hash verification from trusted registries",
+      "production_status": "Prototype partial",
+      "evidence_required": "Verification policy and failed-authenticity test",
+      "family": "SR"
+    }
+  ],
+  "model": {
+    "accuracy": 0.6488888888888888,
+    "accuracy_by_segment": {
+      "consumer": 0.5194805194805194,
+      "enterprise": 0.6571428571428571,
+      "small_business": 0.7692307692307693
+    },
+    "classification_report": {
+      "accuracy": 0.6488888888888888,
+      "macro avg": {
+        "f1-score": 0.5893060171179085,
+        "precision": 0.6023728006086656,
+        "recall": 0.6303469678469679,
+        "support": 225
+      },
+      "product_a": {
+        "f1-score": 0.7982062780269058,
+        "precision": 0.839622641509434,
+        "recall": 0.7606837606837606,
+        "support": 117
+      },
+      "product_b": {
+        "f1-score": 0.5652173913043478,
+        "precision": 0.6724137931034483,
+        "recall": 0.4875,
+        "support": 80
+      },
+      "product_c": {
+        "f1-score": 0.4044943820224719,
+        "precision": 0.29508196721311475,
+        "recall": 0.6428571428571429,
+        "support": 28
+      },
+      "weighted avg": {
+        "f1-score": 0.6663705268005556,
+        "precision": 0.7124055448304304,
+        "recall": 0.6488888888888888,
+        "support": 225
+      }
+    },
+    "dataset": "data/synthetic/sales_training.csv",
+    "dataset_sha256": "638133b3aa94798b06d2680e1486a047e397d2926a69d364add4022c874fc817",
+    "limitations": [
+      "Synthetic data and labels do not establish business validity.",
+      "Group accuracy is only a demonstration signal and is not proof of fairness.",
+      "Random split does not replace temporal or out-of-population validation."
+    ],
+    "model_sha256": "061650daf641ec2c8001e0a116838ca026479301d15d10f1fca8f1a9d70284d1",
+    "model_version": "synthetic-20260826133013",
+    "python_version": "3.12.13",
+    "rows": 900,
+    "scikit_learn_version": "1.9.0",
+    "test_rows": 225
+  },
+  "model_export": {
+    "format": "sklearn-logistic-regression-export-v1",
+    "model_version": "synthetic-20260826133013",
+    "dataset_sha256": "638133b3aa94798b06d2680e1486a047e397d2926a69d364add4022c874fc817",
+    "feature_names": [
+      "segment",
+      "region",
+      "tenure_months",
+      "purchases_90d",
+      "avg_order_value",
+      "support_contacts_90d",
+      "days_since_last_purchase"
+    ],
+    "categorical": [
+      {
+        "name": "segment",
+        "categories": [
+          "consumer",
+          "enterprise",
+          "small_business"
+        ]
+      },
+      {
+        "name": "region",
+        "categories": [
+          "east",
+          "north",
+          "south",
+          "west"
+        ]
+      }
+    ],
+    "numeric": [
+      {
+        "name": "tenure_months",
+        "mean": 92.9037037037037,
+        "scale": 52.514953648012956
+      },
+      {
+        "name": "purchases_90d",
+        "mean": 8.877037037037036,
+        "scale": 6.00947327131324
+      },
+      {
+        "name": "avg_order_value",
+        "mean": 427.6051407407408,
+        "scale": 366.79909172362534
+      },
+      {
+        "name": "support_contacts_90d",
+        "mean": 1.574814814814815,
+        "scale": 1.2782927572015164
+      },
+      {
+        "name": "days_since_last_purchase",
+        "mean": 87.68,
+        "scale": 52.48535428874244
+      }
+    ],
+    "classes": [
+      "product_a",
+      "product_b",
+      "product_c"
+    ],
+    "coefficients": [
+      [
+        0.7722967379847724,
+        -0.3376393498288386,
+        -0.43010919390703894,
+        -0.17975544256925852,
+        0.00829777327856426,
+        0.07658342976083482,
+        0.09942243377875375,
+        -0.07316047814120323,
+        2.813138650279518,
+        -1.4731051974435647,
+        -0.3085202044632551,
+        -0.6054701456934157
+      ],
+      [
+        -0.3763913575723795,
+        -0.3997452110634541,
+        0.7787574380397937,
+        0.11092825544841199,
+        -0.017962965011836567,
+        -0.09736261986645835,
+        0.007018198833840604,
+        0.4001025370100853,
+        -0.9409069839428013,
+        0.8463862808399238,
+        -0.19877736905572602,
+        0.18107163867976514
+      ],
+      [
+        -0.3959053804123919,
+        0.7373845608922937,
+        -0.3486482441327558,
+        0.06882718712084594,
+        0.009665191733273551,
+        0.020779190105622975,
+        -0.10644063261259615,
+        -0.32694205886888494,
+        -1.8722316663367187,
+        0.6267189166036313,
+        0.5072975735189856,
+        0.42439850701364934
+      ]
+    ],
+    "intercepts": [
+      0.38505346058963197,
+      0.19592644191911718,
+      -0.5809799025087442
+    ],
+    "verification_vectors": [
+      {
+        "input": {
+          "segment": "small_business",
+          "region": "north",
+          "tenure_months": 36,
+          "purchases_90d": 8,
+          "avg_order_value": 240,
+          "support_contacts_90d": 1,
+          "days_since_last_purchase": 12
+        },
+        "class": "product_a",
+        "confidence": 0.7579552658628236
+      },
+      {
+        "input": {
+          "segment": "consumer",
+          "region": "west",
+          "tenure_months": 8,
+          "purchases_90d": 2,
+          "avg_order_value": 45,
+          "support_contacts_90d": 3,
+          "days_since_last_purchase": 40
+        },
+        "class": "product_c",
+        "confidence": 0.7063390501576923
+      },
+      {
+        "input": {
+          "segment": "enterprise",
+          "region": "east",
+          "tenure_months": 82,
+          "purchases_90d": 18,
+          "avg_order_value": 1200,
+          "support_contacts_90d": 0,
+          "days_since_last_purchase": 4
+        },
+        "class": "product_a",
+        "confidence": 0.8998399575132362
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "Check": "Pytest",
+      "Result": "9 passed",
+      "Interpretation": "Functional and security regression procedures; passing tests do not prove production controls."
+    },
+    {
+      "Check": "Ruff",
+      "Result": "Passed",
+      "Interpretation": "Static quality checks."
+    },
+    {
+      "Check": "Bandit findings",
+      "Result": "0",
+      "Interpretation": "Requires human triage for exploitability and false positives."
+    },
+    {
+      "Check": "API pip-audit vulnerabilities",
+      "Result": "0",
+      "Interpretation": "Direct environment/dependency advisories at scan time; transitive resolution may vary by platform."
+    },
+    {
+      "Check": "Trainer pip-audit vulnerabilities",
+      "Result": "0",
+      "Interpretation": "Includes the optional MLflow client dependency set."
+    },
+    {
+      "Check": "API CycloneDX SBOM",
+      "Result": "9 components",
+      "Interpretation": "evidence/sbom/python.cdx.json; inventory input, not proof of trust."
+    },
+    {
+      "Check": "Trainer CycloneDX SBOM",
+      "Result": "10 components",
+      "Interpretation": "evidence/sbom/trainer-python.cdx.json; inventory input, not proof of trust."
+    },
+    {
+      "Check": "Trivy repository scan",
+      "Result": "0C/0H; 0 misconfig; 0 secret",
+      "Interpretation": "Filesystem scan at evidence time; zero findings does not prove absence."
+    },
+    {
+      "Check": "Trivy image scans",
+      "Result": "api: 3C/13H; trainer: 3C/13H; dashboard: 3C/13H",
+      "Interpretation": "Raw fixed and unfixed findings are retained for human reachability and mitigation triage."
+    },
+    {
+      "Check": "Syft repository SBOM",
+      "Result": "34 components",
+      "Interpretation": "Repository-level package inventory."
+    },
+    {
+      "Check": "Syft image SBOMs",
+      "Result": "api 2833, trainer 2927, dashboard 2862 components",
+      "Interpretation": "Per-image CycloneDX inventories; counts vary with transitive packages."
+    },
+    {
+      "Check": "NIST OSCAL CLI",
+      "Result": "Valid",
+      "Interpretation": "Profile model validation plus exact match to the 38-control CSV selection."
+    }
+  ],
+  "workshops": [
+    {
+      "number": 1,
+      "title": "Scope and security baseline",
+      "tables": [
+        {
+          "heading": "Business values",
+          "headers": [
+            "ID",
+            "Business value",
+            "Security needs"
+          ],
+          "rows": [
+            {
+              "ID": "BV-01",
+              "Business value": "Customer information and trust",
+              "Security needs": "Confidentiality, integrity, privacy, accountability"
+            },
+            {
+              "ID": "BV-02",
+              "Business value": "Sales and transaction information",
+              "Security needs": "Confidentiality, integrity, availability"
+            },
+            {
+              "ID": "BV-03",
+              "Business value": "Recommendation correctness",
+              "Security needs": "Integrity, reliability, explainability"
+            },
+            {
+              "ID": "BV-04",
+              "Business value": "Commercial strategy/model intelligence",
+              "Security needs": "Confidentiality, integrity"
+            },
+            {
+              "ID": "BV-05",
+              "Business value": "Sales decision process",
+              "Security needs": "Availability, human oversight, traceability"
+            },
+            {
+              "ID": "BV-06",
+              "Business value": "Revenue and customer relationship",
+              "Security needs": "Integrity, availability, fairness"
+            }
+          ]
+        },
+        {
+          "heading": "Supporting assets",
+          "headers": [
+            "ID",
+            "Supporting asset",
+            "Production status"
+          ],
+          "rows": [
+            {
+              "ID": "SA-01",
+              "Supporting asset": "Customer/CRM source",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-02",
+              "Supporting asset": "Sales-history source",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-03",
+              "Supporting asset": "Data preparation and feature pipeline",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-04",
+              "Supporting asset": "Versioned training dataset/feature definitions",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-05",
+              "Supporting asset": "Training environment and code repository",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-06",
+              "Supporting asset": "Open-source packages/model inputs",
+              "Production status": "[CONFIRMED] Concept says open source; exact items unknown"
+            },
+            {
+              "ID": "SA-07",
+              "Supporting asset": "Model artifact and registry",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-08",
+              "Supporting asset": "Recommendation service/API",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-09",
+              "Supporting asset": "Sales application and endpoint",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-10",
+              "Supporting asset": "IAM, secrets and cryptographic keys",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-11",
+              "Supporting asset": "Audit, quality and security monitoring",
+              "Production status": "[OPEN QUESTION]"
+            },
+            {
+              "ID": "SA-12",
+              "Supporting asset": "Personnel, governance and procedures",
+              "Production status": "[OPEN QUESTION]"
+            }
+          ]
+        },
+        {
+          "heading": "Feared events and provisional severity",
+          "headers": [
+            "ID",
+            "Feared event",
+            "Affected values",
+            "Provisional severity",
+            "Rationale"
+          ],
+          "rows": [
+            {
+              "ID": "FE-01",
+              "Feared event": "Unauthorized disclosure of customer information",
+              "Affected values": "BV-01, BV-02",
+              "Provisional severity": "4 Severe",
+              "Rationale": "Potential material privacy, trust, contractual and legal harm; data scope unknown."
+            },
+            {
+              "ID": "FE-02",
+              "Feared event": "Corruption of customer/sales/training information",
+              "Affected values": "BV-01, BV-02, BV-03",
+              "Provisional severity": "4 Severe",
+              "Rationale": "Can systematically corrupt training and business decisions."
+            },
+            {
+              "ID": "FE-03",
+              "Feared event": "Manipulation or unauthorized replacement of the model/recommendations",
+              "Affected values": "BV-03, BV-05, BV-06",
+              "Provisional severity": "4 Severe",
+              "Rationale": "May scale incorrect or self-serving offers across customers."
+            },
+            {
+              "ID": "FE-04",
+              "Feared event": "Recommendation service unavailable",
+              "Affected values": "BV-05, BV-06",
+              "Provisional severity": "3 Significant",
+              "Rationale": "Sales process may degrade; manual fallback and RTO are unknown."
+            },
+            {
+              "ID": "FE-05",
+              "Feared event": "Theft of model or commercial intelligence",
+              "Affected values": "BV-04",
+              "Provisional severity": "3 Significant",
+              "Rationale": "Could expose strategy/IP; actual model value is unknown."
+            },
+            {
+              "ID": "FE-06",
+              "Feared event": "Unfair, invalid, unexplained or drifting recommendations cause harm",
+              "Affected values": "BV-01, BV-03, BV-05, BV-06",
+              "Provisional severity": "4 Severe",
+              "Rationale": "Can harm customers and business trust; decision impact and protected groups are unknown."
+            },
+            {
+              "ID": "FE-07",
+              "Feared event": "Actions and decisions cannot be reconstructed or contested",
+              "Affected values": "BV-01, BV-05",
+              "Provisional severity": "3 Significant",
+              "Rationale": "Weakens accountability, incident response and redress."
+            }
+          ]
+        },
+        {
+          "heading": "Security baseline review",
+          "headers": [
+            "Area",
+            "Baseline objective",
+            "Production status",
+            "Evidence needed"
+          ],
+          "rows": [
+            {
+              "Area": "Governance",
+              "Baseline objective": "Roles, policies, risk acceptance and AI lifecycle gates",
+              "Production status": "Not assessed",
+              "Evidence needed": "Policies, RACI, approvals"
+            },
+            {
+              "Area": "IAM",
+              "Baseline objective": "Strong authentication, least privilege, reviews, separation of duties",
+              "Production status": "Not assessed",
+              "Evidence needed": "IAM exports/configuration/reviews"
+            },
+            {
+              "Area": "Data protection",
+              "Baseline objective": "Inventory, minimization, lawful use, encryption, retention",
+              "Production status": "Not assessed",
+              "Evidence needed": "Data inventory, DPIA, keys/config"
+            },
+            {
+              "Area": "Secure development",
+              "Baseline objective": "Review, protected branches, tests, secrets and dependency management",
+              "Production status": "Not assessed",
+              "Evidence needed": "Repository/CI evidence"
+            },
+            {
+              "Area": "ML lifecycle",
+              "Baseline objective": "Lineage, validation, approval, integrity, rollback, monitoring",
+              "Production status": "Not assessed",
+              "Evidence needed": "Registry, model card, promotion records"
+            },
+            {
+              "Area": "Operations",
+              "Baseline objective": "Logging, alerting, incident, backup, continuity and recovery",
+              "Production status": "Not assessed",
+              "Evidence needed": "SIEM, playbooks, recovery tests"
+            },
+            {
+              "Area": "Supply chain",
+              "Baseline objective": "Trusted sources, SBOM, provenance, vulnerability/license response",
+              "Production status": "Not assessed",
+              "Evidence needed": "SBOM, attestations, tickets"
+            }
+          ]
+        }
+      ],
+      "source": "ebios/workshop-1/README.md"
+    },
+    {
+      "number": 2,
+      "title": "Risk sources",
+      "tables": [
+        {
+          "heading": "Details",
+          "headers": [
+            "Pair ID",
+            "Risk source",
+            "Objective",
+            "Motivation/capability hypothesis",
+            "Relevance",
+            "Feared events"
+          ],
+          "rows": [
+            {
+              "Pair ID": "RSO-01",
+              "Risk source": "Cybercriminal",
+              "Objective": "Steal customer data or extort the organization",
+              "Motivation/capability hypothesis": "Monetization; commodity credential and application attacks",
+              "Relevance": "High",
+              "Feared events": "FE-01, FE-04"
+            },
+            {
+              "Pair ID": "RSO-02",
+              "Risk source": "Supply-chain attacker",
+              "Objective": "Gain execution/access through an OSS package, model, image or build dependency",
+              "Motivation/capability hypothesis": "Compromise one upstream component to reach many users",
+              "Relevance": "High",
+              "Feared events": "FE-01, FE-02, FE-03, FE-04"
+            },
+            {
+              "Pair ID": "RSO-03",
+              "Risk source": "Malicious or coerced insider",
+              "Objective": "Manipulate data/model or export customer/commercial information",
+              "Motivation/capability hypothesis": "Legitimate access and business/technical knowledge",
+              "Relevance": "High",
+              "Feared events": "FE-01, FE-02, FE-03, FE-05, FE-07"
+            },
+            {
+              "Pair ID": "RSO-04",
+              "Risk source": "Competitor/economic actor",
+              "Objective": "Reproduce model behavior or obtain commercial strategy",
+              "Motivation/capability hypothesis": "Repeated legitimate/abusive queries or insider/supply-chain access",
+              "Relevance": "Medium",
+              "Feared events": "FE-05"
+            },
+            {
+              "Pair ID": "RSO-05",
+              "Risk source": "External abuser with valid/compromised access",
+              "Objective": "Bias recommendations, enumerate data/model behavior or exhaust service",
+              "Motivation/capability hypothesis": "Fraud, disruption or advantage",
+              "Relevance": "Medium",
+              "Feared events": "FE-03, FE-04, FE-05, FE-06"
+            },
+            {
+              "Pair ID": "RSO-06",
+              "Risk source": "Accidental/internal process failure",
+              "Objective": "Introduce bad labels, unauthorized version, drift or privacy leakage",
+              "Motivation/capability hypothesis": "Human error, automation defect, weak governance",
+              "Relevance": "High",
+              "Feared events": "FE-01, FE-02, FE-03, FE-06, FE-07"
+            }
+          ]
+        }
+      ],
+      "source": "ebios/workshop-2/README.md"
+    },
+    {
+      "number": 3,
+      "title": "Strategic scenarios",
+      "tables": [
+        {
+          "heading": "Dependency assessment",
+          "headers": [
+            "Ecosystem party",
+            "Dependency",
+            "Exposure/weakness to validate",
+            "Security objective"
+          ],
+          "rows": [
+            {
+              "Ecosystem party": "Source-system owner",
+              "Dependency": "Accurate, authorized customer/sales data",
+              "Exposure/weakness to validate": "Excess access, poor labels, undocumented changes",
+              "Security objective": "Data contract, lineage, quality and access review"
+            },
+            {
+              "Ecosystem party": "OSS registries/maintainers",
+              "Dependency": "Authentic packages/models and advisories",
+              "Exposure/weakness to validate": "Account takeover, typosquat, malicious update, abandoned component",
+              "Security objective": "Pin, verify provenance, scan, approve and monitor"
+            },
+            {
+              "Ecosystem party": "Hosting/CI provider",
+              "Dependency": "Isolated execution, availability, evidence",
+              "Exposure/weakness to validate": "Misconfiguration, token theft, regional outage",
+              "Security objective": "Hardened build/runtime, short-lived identity, recovery"
+            },
+            {
+              "Ecosystem party": "Enterprise IAM/SOC",
+              "Dependency": "Identity assurance and response",
+              "Exposure/weakness to validate": "Excess privilege, alert gaps",
+              "Security objective": "MFA, least privilege, monitoring and incident linkage"
+            },
+            {
+              "Ecosystem party": "Sales workforce/endpoints",
+              "Dependency": "Correct use and protected sessions",
+              "Exposure/weakness to validate": "Phishing, misuse, shadow exports, overreliance",
+              "Security objective": "Training, endpoint controls, human-oversight UX"
+            },
+            {
+              "Ecosystem party": "Data/ML teams",
+              "Dependency": "Correct data/model lifecycle",
+              "Exposure/weakness to validate": "Error, unauthorized change, conflicts of duty",
+              "Security objective": "Review, separation, validation, approval, audit"
+            }
+          ]
+        },
+        {
+          "heading": "Strategic scenarios",
+          "headers": [
+            "ID",
+            "Risk source → ecosystem path → target → feared event",
+            "Linked pair",
+            "Priority rationale"
+          ],
+          "rows": [
+            {
+              "ID": "SS-01",
+              "Risk source → ecosystem path → target → feared event": "Cybercriminal → compromised user/service identity → application/API → customer information → FE-01",
+              "Linked pair": "RSO-01",
+              "Priority rationale": "Common access path with potentially severe data impact."
+            },
+            {
+              "ID": "SS-02",
+              "Risk source → ecosystem path → target → feared event": "Supply-chain attacker → OSS registry/dependency → CI/training environment → credentials/data/model → FE-01/02/03",
+              "Linked pair": "RSO-02",
+              "Priority rationale": "Open-source reliance creates a necessary external dependency."
+            },
+            {
+              "ID": "SS-03",
+              "Risk source → ecosystem path → target → feared event": "Insider/process failure → source/data pipeline → training data → model behavior → FE-02/03/06",
+              "Linked pair": "RSO-03/06",
+              "Priority rationale": "Integrity failures can scale silently through retraining."
+            },
+            {
+              "ID": "SS-04",
+              "Risk source → ecosystem path → target → feared event": "Malicious admin → registry/deployment path → inference model → recommendations → FE-03/07",
+              "Linked pair": "RSO-03",
+              "Priority rationale": "Privileged access can bypass normal user controls."
+            },
+            {
+              "ID": "SS-05",
+              "Risk source → ecosystem path → target → feared event": "Competitor/abuser → valid inference access → repeated queries → model/commercial intelligence → FE-05",
+              "Linked pair": "RSO-04/05",
+              "Priority rationale": "Predictive interfaces may leak behavior without traditional compromise."
+            },
+            {
+              "ID": "SS-06",
+              "Risk source → ecosystem path → target → feared event": "External abuser/failure → API/platform/dependency → service capacity → FE-04",
+              "Linked pair": "RSO-01/05/06",
+              "Priority rationale": "Availability and fallback needs are unknown."
+            },
+            {
+              "ID": "SS-07",
+              "Risk source → ecosystem path → target → feared event": "Lifecycle failure → unrepresentative data/unchecked drift → recommendations/customer treatment → FE-06",
+              "Linked pair": "RSO-06",
+              "Priority rationale": "AI harm can emerge without a malicious attacker."
+            },
+            {
+              "ID": "SS-08",
+              "Risk source → ecosystem path → target → feared event": "Operations/process failure → over-collection or sensitive logs → unauthorized readers → FE-01/07",
+              "Linked pair": "RSO-03/06",
+              "Priority rationale": "Observability can create a secondary sensitive dataset."
+            }
+          ]
+        }
+      ],
+      "source": "ebios/workshop-3/README.md"
+    },
+    {
+      "number": 4,
+      "title": "Operational scenarios",
+      "tables": [],
+      "source": "ebios/workshop-4/README.md"
+    },
+    {
+      "number": 5,
+      "title": "Risk treatment",
+      "tables": [],
+      "source": "ebios/workshop-5/README.md"
+    }
+  ],
+  "ai_rmf": [
+    {
+      "name": "GOVERN",
+      "tables": [
+        {
+          "heading": "Target outcomes and actions",
+          "headers": [
+            "AI RMF outcome area",
+            "Reference action",
+            "Traceability",
+            "Status"
+          ],
+          "rows": [
+            {
+              "AI RMF outcome area": "GOVERN 1: Policies/processes",
+              "Reference action": "Approve intended/prohibited use risk appetite lifecycle gates exceptions and retirement",
+              "Traceability": "R-01 to R-10; PM-9",
+              "Status": "Documented proposal; [DECISION REQUIRED]"
+            },
+            {
+              "AI RMF outcome area": "GOVERN 2: Accountability",
+              "Reference action": "Name business system data model security privacy/legal validator and risk-acceptance roles",
+              "Traceability": "R-01 to R-10",
+              "Status": "Role placeholders only"
+            },
+            {
+              "AI RMF outcome area": "GOVERN 3: Workforce/culture",
+              "Reference action": "Train sales users developers validators operators and responders for their AI-risk duties",
+              "Traceability": "R-02 R-03 R-04 R-07 R-08",
+              "Status": "Production not assessed"
+            },
+            {
+              "AI RMF outcome area": "GOVERN 4: Culture and communication",
+              "Reference action": "Enable challenge escalation override incident reporting and learning without retaliation",
+              "Traceability": "R-07 R-08",
+              "Status": "Production not assessed"
+            },
+            {
+              "AI RMF outcome area": "GOVERN 5: Engagement",
+              "Reference action": "Include affected-user customer sales domain privacy security and legal perspectives",
+              "Traceability": "R-01 R-07 R-10",
+              "Status": "Questionnaire prepared"
+            },
+            {
+              "AI RMF outcome area": "GOVERN 6: Third parties",
+              "Reference action": "Inventory and govern packages models datasets services and vendors across the lifecycle",
+              "Traceability": "R-03",
+              "Status": "SBOM procedure in lab; production unknown"
+            }
+          ]
+        }
+      ],
+      "source": "ai-rmf/govern.md"
+    },
+    {
+      "name": "MAP",
+      "tables": [
+        {
+          "heading": "Actors",
+          "headers": [
+            "Actor",
+            "Responsibility to confirm"
+          ],
+          "rows": [
+            {
+              "Actor": "Business owner",
+              "Responsibility to confirm": "Purpose, success/harm definition, fallback and residual risk"
+            },
+            {
+              "Actor": "Data owner/steward",
+              "Responsibility to confirm": "Authority, quality, lineage, access, retention and correction"
+            },
+            {
+              "Actor": "Model developer",
+              "Responsibility to confirm": "Reproducible development, documentation and limitations"
+            },
+            {
+              "Actor": "Independent validator",
+              "Responsibility to confirm": "Threshold design, testing, challenge and exception reporting"
+            },
+            {
+              "Actor": "Platform/API operator",
+              "Responsibility to confirm": "Secure deployment, integrity, availability, logging and rollback"
+            },
+            {
+              "Actor": "Sales employee",
+              "Responsibility to confirm": "Contextual review, override, explanation and escalation"
+            },
+            {
+              "Actor": "Security/privacy/legal",
+              "Responsibility to confirm": "Threat, control, privacy, legal and incident oversight"
+            },
+            {
+              "Actor": "Customer/affected person",
+              "Responsibility to confirm": "Receives impact and needs appropriate transparency/contest/redress"
+            }
+          ]
+        }
+      ],
+      "source": "ai-rmf/map.md"
+    },
+    {
+      "name": "MEASURE",
+      "tables": [
+        {
+          "heading": "Details",
+          "headers": [
+            "Characteristic",
+            "Measurement plan",
+            "Minimum evidence",
+            "Trigger/action owner"
+          ],
+          "rows": [
+            {
+              "Characteristic": "Validity/accuracy",
+              "Measurement plan": "Holdout and temporal validation; confusion matrix; per-product precision/recall",
+              "Minimum evidence": "Reproducible dataset/model versions and independent report",
+              "Trigger/action owner": "Model-risk owner"
+            },
+            {
+              "Characteristic": "Calibration",
+              "Measurement plan": "Reliability curve/Brier or class calibration; confidence-use review",
+              "Minimum evidence": "Calibration report and UI decision",
+              "Trigger/action owner": "Model-risk/business owner"
+            },
+            {
+              "Characteristic": "Reliability",
+              "Measurement plan": "Repeatability deterministic versioning error/latency rates",
+              "Minimum evidence": "Service/model SLO dashboard",
+              "Trigger/action owner": "Service owner"
+            },
+            {
+              "Characteristic": "Fairness",
+              "Measurement plan": "Compare error/selection/benefit metrics across legally and contextually relevant groups with sample sizes and uncertainty",
+              "Minimum evidence": "Approved fairness rationale metrics thresholds and exceptions",
+              "Trigger/action owner": "Business/privacy/legal/model-risk"
+            },
+            {
+              "Characteristic": "Explainability",
+              "Measurement plan": "User research plus stable reason codes appropriate to model/use",
+              "Minimum evidence": "Sales-user test and explanation limitations",
+              "Trigger/action owner": "Product/business owner"
+            },
+            {
+              "Characteristic": "Privacy",
+              "Measurement plan": "Minimization review access tests membership/inversion assessment and log-content tests",
+              "Minimum evidence": "Privacy impact record and test report",
+              "Trigger/action owner": "Privacy/data owner"
+            },
+            {
+              "Characteristic": "Security/resilience",
+              "Measurement plan": "Threat model tamper/authorization/abuse/dependency/recovery tests",
+              "Minimum evidence": "Security assessment and remediation",
+              "Trigger/action owner": "Security/system owner"
+            },
+            {
+              "Characteristic": "Drift",
+              "Measurement plan": "Feature prediction and outcome drift; data-quality change; performance when labels arrive",
+              "Minimum evidence": "Baseline threshold alert and response record",
+              "Trigger/action owner": "Model owner"
+            },
+            {
+              "Characteristic": "Human oversight",
+              "Measurement plan": "Override rate reason distribution escalation/contest outcomes and automation-bias research",
+              "Minimum evidence": "UX test and periodic monitoring",
+              "Trigger/action owner": "Business/product owner"
+            },
+            {
+              "Characteristic": "Transparency/accountability",
+              "Measurement plan": "Complete model card lineage decision and deployment traceability",
+              "Minimum evidence": "Version-linked records and audit sampling",
+              "Trigger/action owner": "Model/system owner"
+            }
+          ]
+        }
+      ],
+      "source": "ai-rmf/measure.md"
+    },
+    {
+      "name": "MANAGE",
+      "tables": [
+        {
+          "heading": "Response pattern",
+          "headers": [
+            "Condition",
+            "Required action"
+          ],
+          "rows": [
+            {
+              "Condition": "Unknown/unauthorized use or data",
+              "Required action": "Stop design/deployment; resolve authority and scope"
+            },
+            {
+              "Condition": "Failed security/privacy gate or untrusted artifact",
+              "Required action": "Block build/deployment; quarantine and investigate"
+            },
+            {
+              "Condition": "Model metric below approved threshold",
+              "Required action": "Do not promote, or roll back/disable affected use under runbook"
+            },
+            {
+              "Condition": "Drift/data-quality alert",
+              "Required action": "Validate source and business change; assess performance; retrain only through full gate"
+            },
+            {
+              "Condition": "Harm/contest pattern",
+              "Required action": "Pause affected use when necessary; investigate process/model/data and provide redress"
+            },
+            {
+              "Condition": "Supplier/advisory vulnerability",
+              "Required action": "Triage exploitability and exposure; remediate within SLA or approve time-bound exception"
+            },
+            {
+              "Condition": "Security/privacy/AI incident",
+              "Required action": "Execute coordinated response, notification, evidence preservation, rollback and lessons learned"
+            }
+          ]
+        }
+      ],
+      "source": "ai-rmf/manage.md"
+    }
+  ],
+  "threat_tables": [
+    {
+      "heading": "Details",
+      "headers": [
+        "Risk",
+        "MITRE ATLAS technique",
+        "OWASP ML item",
+        "Why relevant",
+        "Primary measures"
+      ],
+      "rows": [
+        {
+          "Risk": "R-02",
+          "MITRE ATLAS technique": "AML.T0020 Poison Training Data; AML.T0010.002 Data",
+          "OWASP ML item": "ML02 Data Poisoning; ML08 Model Skewing",
+          "Why relevant": "Training sources/labels can be influenced or corrupted",
+          "Primary measures": "Lineage version digest validation separation approval"
+        },
+        {
+          "Risk": "R-03",
+          "MITRE ATLAS technique": "AML.T0010 AI Supply Chain Compromise; AML.T0010.001 AI Software; AML.T0010.003 Model",
+          "OWASP ML item": "ML06 AI Supply Chain Attacks; ML10 Model Poisoning",
+          "Why relevant": "External packages/models can introduce code or behavior",
+          "Primary measures": "Allowlist pin SBOM provenance isolation signatures"
+        },
+        {
+          "Risk": "R-04",
+          "MITRE ATLAS technique": "AML.T0018 Manipulate AI Model; AML.T0018.000 Poison AI Model; AML.T0018.001 Modify AI Model Architecture",
+          "OWASP ML item": "ML09 Output Integrity; ML10 Model Poisoning",
+          "Why relevant": "Artifact/admin compromise changes predictions",
+          "Primary measures": "Two-person promotion signed artifacts audit rollback"
+        },
+        {
+          "Risk": "R-05",
+          "MITRE ATLAS technique": "AML.T0040 AI Model Inference API Access; AML.T0024 Exfiltration via AI Inference API; AML.T0024.000/.001/.002",
+          "OWASP ML item": "ML03 Model Inversion; ML04 Membership Inference; ML05 Model Theft",
+          "Why relevant": "Adaptive queries can reveal data or approximate a model",
+          "Primary measures": "Output minimization rate/abuse controls privacy testing"
+        },
+        {
+          "Risk": "R-06",
+          "MITRE ATLAS technique": "AML.T0029 Denial of AI Service",
+          "OWASP ML item": "Not mapped",
+          "Why relevant": "Resource-heavy inference can be flooded",
+          "Primary measures": "Limits capacity isolation fallback recovery"
+        },
+        {
+          "Risk": "R-07/R-08",
+          "MITRE ATLAS technique": "Not mapped (non-adversarial lifecycle path)",
+          "OWASP ML item": "ML08 Model Skewing",
+          "Why relevant": "Distribution/behavior can change without an attacker",
+          "Primary measures": "Segment metrics drift monitoring thresholds response"
+        }
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "status": "ASSUMPTION",
+      "text": "The system is internal and recommendations are shown to authenticated sales employees. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "A salesperson, not the model, makes the final offer decision. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "Customer and historical sales data are used to train a predictive classifier. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "The production technology stack is unknown; PostgreSQL, scikit-learn, MLflow, FastAPI, and Streamlit exist only in the lab. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "Recommendations and model lifecycle events should be auditable without logging raw sensitive features. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "Risk scores use the repository's 4×4 ordinal method solely for prioritization. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "Customer segment is used in the synthetic lab as a fairness monitoring group, not as a legally protected attribute. "
+    },
+    {
+      "status": "ASSUMPTION",
+      "text": "The model is refreshed periodically and can experience data/concept drift. "
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What is the authoritative business purpose, prohibited use, and acceptable-use boundary?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "Does the salesperson always make the final decision, and can they reject/override a recommendation?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What customer attributes, special-category data, and derived features are processed?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "Which jurisdictions, contracts, privacy notices, sector rules, and retention requirements apply?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What are the actual sources, interfaces, hosting environments, network zones, and third parties?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "Which open-source model, packages, repositories, and licenses are used, and how is provenance verified?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "Who can read source data, modify training code/data, approve a model, deploy it, query the API, and view logs?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What identity provider, MFA, secrets manager, key management, and privileged-access controls exist?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What model quality, fairness, explainability, latency, availability, and drift thresholds have business approval?"
+    },
+    {
+      "status": "OPEN QUESTION",
+      "text": "What incident, rollback, customer redress, and model retirement procedures exist?"
+    },
+    {
+      "status": "DECISION REQUIRED",
+      "text": "Who owns every risk and who has authority to accept residual risk?"
+    },
+    {
+      "status": "DECISION REQUIRED",
+      "text": "What risk appetite and scoring method supersede the provisional 4×4 scale?"
+    }
+  ],
+  "oscal": {
+    "profile_id": "e529fc1d-b92b-4cf4-bca8-57e7647bea25",
+    "title": "AI Sales Recommendation System - Provisional NIST SP 800-53 Rev. 5 Control Profile",
+    "version": "0.1.0",
+    "selected_controls": 38,
+    "validation": "Valid"
+  }
+}
