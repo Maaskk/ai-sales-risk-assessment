@@ -34,6 +34,21 @@ jobs:
             prototype/api/requirements-dev.txt
             prototype/api/requirements-trainer.txt
 
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install web dependencies
+        run: npm ci
+
+      - name: Test and build web application
+        run: |
+          npm run test:web
+          npm run lint:web
+          npm run build
+
       - name: Create virtual environment and install dependencies
         run: |
           python -m venv .venv

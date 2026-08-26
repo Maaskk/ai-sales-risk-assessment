@@ -1,10 +1,21 @@
-# AI Sales Recommendation System — Cybersecurity & AI Risk Assessment
+# AI Sales Risk Assessment
 
 [![CI](https://github.com/Maaskk/ai-sales-risk-assessment/actions/workflows/ci.yml/badge.svg)](https://github.com/Maaskk/ai-sales-risk-assessment/actions/workflows/ci.yml)
 
-A professional, evidence-oriented mini assessment of a **synthetic** internal predictive-AI sales recommendation system. It connects EBIOS Risk Manager scenarios to NIST RMF lifecycle activities, NIST SP 800-53 controls, NIST AI RMF outcomes, MITRE ATLAS techniques, OWASP ML Security Top 10 research, and executable security evidence.
+An integrated risk assessment and working laboratory for a synthetic sales recommendation system.
 
-> **Status:** portfolio/laboratory assessment, not an authorization to operate. Company-specific facts, owners, risk appetite, legal requirements, and risk ratings require validation. No real customer data is included.
+Status: reference assessment. It is not an authorization to operate. Company facts, owners, legal requirements and risk ratings require validation. No real customer data is included.
+
+## Web application
+
+The Next.js application provides one interface for the dashboard, EBIOS RM, risk register, NIST controls, OSCAL, AI RMF, threat model, model evidence, reports and synthetic recommendation demo.
+
+```bash
+npm install
+npm run dev
+```
+
+Open <http://localhost:3000>.
 
 ## What is included
 
@@ -14,7 +25,8 @@ A professional, evidence-oriented mini assessment of a **synthetic** internal pr
 - NIST RMF lifecycle mapping, selected SP 800-53 control matrix, and assessment procedures.
 - NIST AI RMF 1.0 GOVERN/MAP/MEASURE/MANAGE assessment (the repository records that 1.0 is under revision as of August 25, 2026).
 - MITRE ATLAS and OWASP ML threat mappings.
-- Dockerized synthetic demonstrator: PostgreSQL, training pipeline, integrity-protected model artifact, FastAPI inference API, and Streamlit dashboard.
+- Integrated Next.js dashboard and model demo for Vercel.
+- Dockerized local lab with PostgreSQL, training pipeline, FastAPI, MLflow and Streamlit.
 - Automated tests for authentication, validation, model integrity, fairness signals, and drift signals.
 - CI, Bandit, pip-audit, Trivy, and Syft workflows/evidence scripts.
 - A self-contained, portable executive HTML report in `report/executive-report.html`.

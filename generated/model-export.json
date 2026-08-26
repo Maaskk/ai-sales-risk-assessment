@@ -1,0 +1,155 @@
+{
+  "format": "sklearn-logistic-regression-export-v1",
+  "model_version": "synthetic-20260826133013",
+  "dataset_sha256": "638133b3aa94798b06d2680e1486a047e397d2926a69d364add4022c874fc817",
+  "feature_names": [
+    "segment",
+    "region",
+    "tenure_months",
+    "purchases_90d",
+    "avg_order_value",
+    "support_contacts_90d",
+    "days_since_last_purchase"
+  ],
+  "categorical": [
+    {
+      "name": "segment",
+      "categories": [
+        "consumer",
+        "enterprise",
+        "small_business"
+      ]
+    },
+    {
+      "name": "region",
+      "categories": [
+        "east",
+        "north",
+        "south",
+        "west"
+      ]
+    }
+  ],
+  "numeric": [
+    {
+      "name": "tenure_months",
+      "mean": 92.9037037037037,
+      "scale": 52.514953648012956
+    },
+    {
+      "name": "purchases_90d",
+      "mean": 8.877037037037036,
+      "scale": 6.00947327131324
+    },
+    {
+      "name": "avg_order_value",
+      "mean": 427.6051407407408,
+      "scale": 366.79909172362534
+    },
+    {
+      "name": "support_contacts_90d",
+      "mean": 1.574814814814815,
+      "scale": 1.2782927572015164
+    },
+    {
+      "name": "days_since_last_purchase",
+      "mean": 87.68,
+      "scale": 52.48535428874244
+    }
+  ],
+  "classes": [
+    "product_a",
+    "product_b",
+    "product_c"
+  ],
+  "coefficients": [
+    [
+      0.7722967379847724,
+      -0.3376393498288386,
+      -0.43010919390703894,
+      -0.17975544256925852,
+      0.00829777327856426,
+      0.07658342976083482,
+      0.09942243377875375,
+      -0.07316047814120323,
+      2.813138650279518,
+      -1.4731051974435647,
+      -0.3085202044632551,
+      -0.6054701456934157
+    ],
+    [
+      -0.3763913575723795,
+      -0.3997452110634541,
+      0.7787574380397937,
+      0.11092825544841199,
+      -0.017962965011836567,
+      -0.09736261986645835,
+      0.007018198833840604,
+      0.4001025370100853,
+      -0.9409069839428013,
+      0.8463862808399238,
+      -0.19877736905572602,
+      0.18107163867976514
+    ],
+    [
+      -0.3959053804123919,
+      0.7373845608922937,
+      -0.3486482441327558,
+      0.06882718712084594,
+      0.009665191733273551,
+      0.020779190105622975,
+      -0.10644063261259615,
+      -0.32694205886888494,
+      -1.8722316663367187,
+      0.6267189166036313,
+      0.5072975735189856,
+      0.42439850701364934
+    ]
+  ],
+  "intercepts": [
+    0.38505346058963197,
+    0.19592644191911718,
+    -0.5809799025087442
+  ],
+  "verification_vectors": [
+    {
+      "input": {
+        "segment": "small_business",
+        "region": "north",
+        "tenure_months": 36,
+        "purchases_90d": 8,
+        "avg_order_value": 240.0,
+        "support_contacts_90d": 1,
+        "days_since_last_purchase": 12
+      },
+      "class": "product_a",
+      "confidence": 0.7579552658628236
+    },
+    {
+      "input": {
+        "segment": "consumer",
+        "region": "west",
+        "tenure_months": 8,
+        "purchases_90d": 2,
+        "avg_order_value": 45.0,
+        "support_contacts_90d": 3,
+        "days_since_last_purchase": 40
+      },
+      "class": "product_c",
+      "confidence": 0.7063390501576923
+    },
+    {
+      "input": {
+        "segment": "enterprise",
+        "region": "east",
+        "tenure_months": 82,
+        "purchases_90d": 18,
+        "avg_order_value": 1200.0,
+        "support_contacts_90d": 0,
+        "days_since_last_purchase": 4
+      },
+      "class": "product_a",
+      "confidence": 0.8998399575132362
+    }
+  ]
+}
