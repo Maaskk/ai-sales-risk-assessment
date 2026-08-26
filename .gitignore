@@ -31,3 +31,6 @@ evidence/sbom/*.json
 evidence/sbom/*.xml
 !evidence/scans/README.md
 !evidence/sbom/README.md
+.vercel
+.env.local
+.env.*.local
