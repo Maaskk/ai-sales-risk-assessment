@@ -5,5 +5,5 @@ pandas==3.0.5
 pydantic-settings==2.15.0
 scikit-learn==1.9.0
 scipy==1.18.1
-msgpack==1.2.1
+msgpack==1.2.2
 uvicorn[standard]==0.52.4
